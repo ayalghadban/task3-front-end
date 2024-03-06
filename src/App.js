@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
+import Header from '../src/Header/Header.jsx'; // استيراد مكون Header
+import Footer from './Footer/Footer.jsx';
+import Home from './Home/Home.jsx';
+import CarTypeSelector from './cartype/CarTypeSelector.jsx';
+import TopCategories from './Top Categories/TopCategories.jsx';
+import Cart from './Cart/Cart.jsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Header/>
+        <Home/>
+        <CarTypeSelector/>
+        <TopCategories/>
+        <Footer/>
+      </div>
+      <div>
+      </div>
+    </Router>
   );
 }
 
