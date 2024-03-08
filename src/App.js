@@ -9,7 +9,6 @@ import Cart from './Cart/Cart.jsx';
 
 function App() {
   return (
-    <Router>
       <div>
         <Header/>
         <Home/>
@@ -17,9 +16,6 @@ function App() {
         <TopCategories/>
         <Footer/>
       </div>
-      <div>
-      </div>
-    </Router>
   );
 }
 
