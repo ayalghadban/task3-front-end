@@ -1,32 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
+import img1 from '../images/dhiva-krishna-X16zXcbxU4U-unsplash.jpg';
+import img2 from '../images/ryan-spencer-c-NEiPIxpYI-unsplash.jpg';
+import img3 from '../images/erik-mclean-AaYAElNOxsQ-unsplash.jpg';
+import img4 from '../images/ixography-05Q_XPF_YKs-unsplash.jpg';
 
-const TopCategoriesContainer = styled.section`
-  max-width: 1200px; // Adjust based on your layout
+const TopCategoriesContainer = styled.div`
+  max-width: 1200px;
   margin: auto;
   padding: 2rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1rem;
+  grid-gap: 2rem;
   text-align: center;
 `;
 
 const CategoryTitle = styled.h2`
   text-align: center;
   margin-bottom: 2rem;
+  width: 100%;
 `;
 
 const Card = styled.div`
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 const CarImage = styled.img`
   width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
+  height: 200px; // تعديل حسب الحاجة لتصغير الصورة
+  object-fit: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 `;
 
 const CarInfo = styled.div`
@@ -34,27 +45,21 @@ const CarInfo = styled.div`
 `;
 
 const CarName = styled.h3`
-  margin: 0.5rem 0;
+  color: #333;
+  margin-bottom: 1rem;
 `;
 
 const CarDetails = styled.p`
-  margin: 0.5rem 0;
   color: #555;
+  margin: 0.5rem 0;
 `;
 
-const DetailsButton = styled.button`
-  background: none;
-  border: none;
+const Price = styled.p`
   color: #007bff;
-  padding: 0.5rem;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  margin: 0.5rem 0;
 `;
 
-const BuyButton = styled.button`
+const Button = styled.button`
   background-color: #007bff;
   color: white;
   border: none;
@@ -62,36 +67,39 @@ const BuyButton = styled.button`
   cursor: pointer;
   border-radius: 5px;
   margin-top: 0.5rem;
+  transition: background-color 0.3s;
 
   &:hover {
     background-color: #0056b3;
   }
 `;
 
-// Mock data
 const cars = [
-  { name: 'AUDI', price: '$500/Day', image: 'audi.jpg' },
-  { name: 'Honda', price: '$500/Day', image: 'honda.jpg' },
-  { name: 'VOLVO', price: '$500/Day', image: 'volvo.jpg' },
-  { name: 'BMW', price: '$500/Day', image: 'bmw.jpg' },
+  { name: 'AUDI', image: img1 },
+  { name: 'Honda', image: img2 },
+  { name: 'VOLVO', image: img3 },
+  { name: 'BMW', image: img4 },
 ];
 
 const TopCategories = () => {
   return (
-    <TopCategoriesContainer>
+    <>
       <CategoryTitle>Top Categories</CategoryTitle>
-      {cars.map((car, index) => (
-        <Card key={index}>
-          <CarImage src={car.image} alt={car.name} />
-          <CarInfo>
-            <CarName>{car.name}</CarName>
-            <CarDetails>{car.price}</CarDetails>
-            <DetailsButton>Details</DetailsButton>
-            <BuyButton>Buy Now</BuyButton>
-          </CarInfo>
-        </Card>
-      ))}
-    </TopCategoriesContainer>
+      <TopCategoriesContainer>
+        {cars.map((car, index) => (
+          <Card key={index}>
+            <CarImage src={car.image} alt={car.name} />
+            <CarInfo>
+              <CarName>{car.name}</CarName>
+              <CarDetails>4 Seater · Manual · 500KM/H</CarDetails>
+              <Price>Starting at $500/Day</Price>
+              <Button>Details</Button>
+              <Button>Buy Now</Button>
+            </CarInfo>
+          </Card>
+        ))}
+      </TopCategoriesContainer>
+    </>
   );
 };
 

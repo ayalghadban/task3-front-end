@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import img1 from '../images/dhiva-krishna-GRV4ypBKgxE-unsplash.jpg'
+import img2 from '../images/joey-banks-YApiWyp0lqo-unsplash.jpg'
+import img3 from '../images/josh-berquist-_4sWbzH5fp8-unsplash.jpg'
+import img4 from '../images/mathieu-renier-4WBvCqeMaDE-unsplash.jpg'
 
 const CarTypeContainer = styled.div`
   display: flex;
@@ -7,6 +11,8 @@ const CarTypeContainer = styled.div`
   padding: 20px;
   gap: 20px; // This creates space between the items
   align-items: center;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
 `;
 
 const CarTypeCard = styled.div`
@@ -18,14 +24,24 @@ const CarTypeCard = styled.div`
   position: relative;
   background-position: center;
   background-size: cover;
-`;
-
-const CarTypeName = styled.div`
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-  font-weight: bold;
+  scroll-snap-align: start;
+  &:hover {
+    &::after {
+      content: "${(props) => props.name}";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); // Semi-transparent overlay
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px; // Large text
+      border-radius: 10px;
+    }
+  }
 `;
 
 const FindByCarType = styled.h2`
@@ -35,10 +51,10 @@ const FindByCarType = styled.h2`
 
 // Sample data - replace with your actual data and images
 const carTypes = [
-  { name: 'Volvo', image: 'path-to-volvo-image.jpg' },
-  { name: 'Bugatti', image: 'path-to-bugatti-image.jpg' },
-  { name: 'BMW', image: 'path-to-bmw-image.jpg' },
-  { name: 'Audi', image: 'path-to-audi-image.jpg' },
+  { name: 'Volvo', image: img1 },
+  { name: 'Bugatti', image: img2 },
+  { name: 'BMW', image:img3 },
+  { name: 'Audi', image: img4 },
 ];
 
 const CarTypeSelector = () => {
@@ -47,9 +63,11 @@ const CarTypeSelector = () => {
       <FindByCarType>Find by Car Type</FindByCarType>
       <CarTypeContainer>
         {carTypes.map((car) => (
-          <CarTypeCard key={car.name} style={{ backgroundImage: `url(${car.image})` }}>
-            <CarTypeName>{car.name}</CarTypeName>
-          </CarTypeCard>
+          <CarTypeCard
+            key={car.name}
+            name={car.name}
+            style={{ backgroundImage: `url(${car.image})` }}
+          />
         ))}
       </CarTypeContainer>
     </>
