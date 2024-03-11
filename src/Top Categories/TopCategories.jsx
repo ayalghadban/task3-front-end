@@ -7,12 +7,14 @@ import img4 from '../images/ixography-05Q_XPF_YKs-unsplash.jpg';
 
 const TopCategoriesContainer = styled.div`
   max-width: 1200px;
-  margin: auto;
+  margin: 40px;
   padding: 2rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CategoryTitle = styled.h2`
@@ -55,22 +57,24 @@ const CarDetails = styled.p`
 `;
 
 const Price = styled.p`
-  color: #007bff;
+  color: #000;
   margin: 0.5rem 0;
 `;
 
 const Button = styled.button`
-  background-color: #007bff;
-  color: white;
-  border: none;
+  background-color: #fff;
+  color: black;
+  border: 1px solid #a17e7e;
   padding: 0.5rem 1rem;
   cursor: pointer;
   border-radius: 5px;
   margin-top: 0.5rem;
   transition: background-color 0.3s;
+  margin:10px;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #a17e7e;
+    color:white;
   }
 `;
 
