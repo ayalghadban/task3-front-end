@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { ReactComponent as FacebookIcon } from '../icons/facebook.svg'; // تأكد من مسارات الأيقونات الخاصة بك
 import { ReactComponent as TwitterIcon } from '../icons/twiter.svg';
 import { ReactComponent as InstagramIcon } from '../icons/instagram.svg';
-
+import logo from '../icons/Logo.svg'
 const FooterContainer = styled.footer`
-  background-color: #8f8f8f; // أو أي لون تفضله
+  background-color: rgba(0, 0, 0, 0.10); // أو أي لون تفضله
   color: #fff; // لون النص
   display: flex;
   flex-direction: column;
@@ -15,12 +15,19 @@ const FooterContainer = styled.footer`
 `;
 
 const FooterContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px; // أو العرض الذي تفضله
-  margin-top: 20px;
+display: flex;
+flex-direction: row; // Default layout for larger screens
+justify-content: space-between;
+align-items: flex-start; // Align to start for row layout
+width: 100%;
+max-width: 1200px;
+margin-top: 20px;
+flex-wrap: wrap;
+
+@media (max-width: 768px) {
+  flex-direction: column; // Stack elements vertically on smaller screens
+  align-items: center; // Center items when in column layout
+}
 `;
 
 const FooterSection = styled.div`
@@ -30,14 +37,21 @@ const FooterSection = styled.div`
 `;
 
 const Title = styled.h4`
-  color: #fff; // لون العنوان
+  color: #000; // لون العنوان
   margin-bottom: 10px;
+  font-size: 28;
+  font-family: 'Righteous';
+font-weight: '400';
+word-wrap: 'break-word'
 `;
 
 const Link = styled.a`
-  color: #fff; // استخدم لون الرابط الخاص بتصميمك
   text-decoration: none;
   margin-bottom: 5px;
+  color: #808080;
+font-size: 25;
+font-weight: '500';
+word-wrap: 'break-word';
 
   &:hover {
     text-decoration: underline;
@@ -46,6 +60,8 @@ const Link = styled.a`
 
 const IconLink = styled.a`
   margin: 0 10px;
+  size: 50%;
+
 `;
 const SocialMediaIcons = styled.div`
   display: flex;
@@ -57,6 +73,7 @@ const Footer = () => {
     <FooterContainer>
       <FooterContent>
         <FooterSection>
+        <img src={logo} alt=''></img>
           <Title>IPSUM CAR COMPANY</Title>
           {/* يمكنك إضافة شعار الشركة هنا إذا أردت */}
         </FooterSection>
@@ -73,8 +90,8 @@ const Footer = () => {
         </FooterSection>
         <FooterSection>
           <Title>Contact us</Title>
-          <p>647P+4G5, Seif Al-Doleh, Aleppo, Syria</p>
-          <p>+96323456</p>
+          <p style={{ color:'#808080' }}>647P+4G5, Seif Al-Doleh, Aleppo, Syria</p>
+          <p style={{ color:'#808080' }}>+96323456</p>
           <Link href="mailto:tagred@gmail.com">tagred@gmail.com</Link>
         </FooterSection>
         <FooterSection>

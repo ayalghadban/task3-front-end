@@ -10,11 +10,19 @@ const TopCategoriesContainer = styled.div`
   margin: 40px;
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   text-align: center;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); // 2 columns for smaller desktops and tablets
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; // 1 column for mobile devices
+    margin: 40px 20px; // Reduce margin for smaller screens
+  }
 `;
 
 const CategoryTitle = styled.h2`
@@ -22,6 +30,7 @@ const CategoryTitle = styled.h2`
   margin-bottom: 2rem;
   width: 100%;
 `;
+
 
 const Card = styled.div`
   background-color: #fff;
@@ -31,6 +40,11 @@ const Card = styled.div`
   transition: transform 0.3s ease-in-out;
   &:hover {
     transform: translateY(-5px);
+  }
+  @media (max-width: 768px) {
+    &:hover {
+      transform: none; // Disable hover effect for mobile devices
+    }
   }
 `;
 
@@ -83,6 +97,8 @@ const cars = [
   { name: 'Honda', image: img2 },
   { name: 'VOLVO', image: img3 },
   { name: 'BMW', image: img4 },
+  { name: 'AUDI', image: img1 },
+  { name: 'Honda', image: img2 },
 ];
 
 const TopCategories = () => {

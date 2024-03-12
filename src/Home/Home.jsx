@@ -1,35 +1,49 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import pic from '../images/IMG_20240301_075813_542.png'
 import back from '../images/Vector 1.png'
-
-
-
 const CarImage = styled.img`
   width: 70%; // Adjust size accordingly
   height: 100%;
   background: url(${back});
   background-size:cover;
+  @media (max-width: 768px) {
+    width: 100%; // زيادة العرض للشاشات الصغيرة
+  }
+`;
+const responsiveSection = css`
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #fff;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center; // تعديل التوجيه ومحاذاة العناصر للشاشات الصغيرة
+  }
 `;
 
 const HeroSection = styled.div`
-  font-family: 'Righteous';
-  display: flex;
-  justify-content: center; // مركزة المحتوى في المنتصف
-  padding: 2rem;
-  background-color: #fff;
+  ${responsiveSection};
 `;
 
 const Slogan = styled.div`
   text-align: center; // تغيير محاذاة النص إلى الوسط
   max-width: 600px; // تحديد العرض الأقصى للنص
+  @media (max-width: 768px) {
+    order: -1; // وضع الشعار قبل الصورة على الشاشات الصغيرة
+  }
 `;
+
 
 const Title = styled.h1`
   font-family: 'Roboto';
   font-weight: 400;
   font-size: 64px; // تصغير حجم الخط
   margin-bottom: 1rem; // تعديل التباعد
+  @media (max-width: 768px) {
+    font-size: 2rem; // تصغير حجم الخط للشاشات الصغيرة
+  }
 `;
 
 const Subtitle = styled.p`
@@ -59,6 +73,9 @@ const FilterContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 2rem;
+  @media (max-width: 768px) {
+    padding: 0.5rem 0; // تقليل الحشوة للشاشات الصغيرة
+  }
 `;
 
 const SearchSection = styled.div`
@@ -69,6 +86,11 @@ const SearchSection = styled.div`
   background-color: #ececec; // تغيير لون الخلفية
   margin: 0 150px; // توسيط القسم
   border-radius: 30px; 
+  @media (max-width: 768px) {
+    flex-direction: column; // تغيير التوجيه ليكون العناصر فوق بعض
+    margin: 3rem ; // إزالة التهميش للتوسيط في الشاشات الصغيرة
+    padding: 1rem; // تقليل الحشوة
+  }
 `;
 
 const Filter = styled.select`
@@ -78,6 +100,10 @@ const Filter = styled.select`
   border-radius: 20px; // تقريب الحواف
   font-size: 0.8rem;
   color: #6f6f6f; // تغيير لون النص
+  @media (max-width: 768px) {
+    width: 100%; // جعل العرض كامل للشاشات الصغيرة
+    margin-top: 0.5rem; // زيادة المسافة بين العناصر
+  }
 `;
 
 const SearchButton = styled.button`
@@ -89,6 +115,11 @@ const SearchButton = styled.button`
   cursor: pointer;
   border-radius: 20px;
   margin-left: 1rem; // إضافة هامش جانبي
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 1rem; // إضافة مسافة بعد العناصر السابقة
+    width: 50%; // جعل الزر بعرض كامل
+  }
 `;
 
 

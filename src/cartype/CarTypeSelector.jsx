@@ -48,15 +48,39 @@ const FindByCarType = styled.h2`
   text-align: center;
   margin-bottom: 20px;
 `;
+const ScrollButton = styled.button`
+  display: none; // By default, we don't show scroll buttons
+  
+  @media (max-width: 768px) {
+    display: block; // Show scroll buttons on mobile devices
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 
-// Sample data - replace with your actual data and images
+    &:first-of-type {
+      left: 10px;
+    }
+
+    &:last-of-type {
+      right: 10px;
+    }
+  }
+`;
+
 const carTypes = [
   { name: 'Volvo', image: img1 },
   { name: 'Bugatti', image: img2 },
   { name: 'BMW', image:img3 },
   { name: 'Audi', image: img4 },
 ];
-
 const CarTypeSelector = () => {
   return (
     <>

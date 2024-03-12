@@ -5,166 +5,184 @@ import img2 from '../images/Rectangle 50.png'
 import img3 from '../images/Rectangle 50 (1).png'
 import img4 from '../images/Rectangle 50 (2).png'
 import Header from '../Header/Header'
+import sahm from '../icons/chevron-right.svg'
 
-const ProductDetailContainer = styled.div`
+import { css } from 'styled-components';
+
+// أضف هذه الوظيفة لتسهيل استخدام الإعلام المختلفة
+const sizes = {
+  desktop: 992,
+  tablet: 768,
+  phone: 576,
+};
+
+// Iterate through the sizes and create a media template
+const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)};
+    }
+  `;
+  return acc;
+}, {});
+
+// استخدم الإعلام المختلفة في مكوناتك
+const Container = styled.div`
   display: flex;
-  background-color: #FFFFFF;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  overflow: hidden;
-  max-width: 900px;
-  margin: 40px auto;
+  margin: 2rem;
+  align-items: center;
+  justify-content: space-around;
+
+  ${media.desktop`justify-content: space-between;`}
+  ${media.tablet`flex-direction: column; align-items: stretch;`}
+  ${media.phone`margin: 1rem;`}
 `;
 
-const ImageSection = styled.div`
-  flex: 3;
-  background-color: #F8F9FA;
-  padding: 20px;
-  position: relative;
+const ImageContainer = styled.div`
+  flex: 1;
+  margin-right: 2rem;
 `;
 
 const MainImage = styled.img`
-  display: block;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
   border-radius: 10px;
 `;
 
-const ThumbnailContainer = styled.div`
-  position: absolute;
-  bottom: 10px;
-  left: 20px;
+const ThumbnailsContainer = styled.div`
   display: flex;
+  justify-content: center;
   gap: 10px;
 `;
 
 const Thumbnail = styled.img`
   width: 50px;
   height: 50px;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 10px;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
-const DetailsSection = styled.div`
-  flex: 5;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const DetailsContainer = styled.div`
+  flex: 1;
 `;
 
-const ProductTitle = styled.h1`
-  font-size: 2.5em;
-  margin: 0 0 20px;
+const Title = styled.h1`
   color: #333;
+  margin-bottom: 0.5rem;
 `;
 
-const RatingAndReview = styled.div`
+const EngineCapacity = styled.p`
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+`;
+
+const RatingContainer = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.2em;
 `;
 
-const StarRating = styled.div`
-  // Style for the star rating will go here
+const Rating = styled.span`
+  color: #a17e7e; // Gold color for rating stars
+  margin-right: 0.5rem;
 `;
 
-const ProductDescription = styled.p`
-  margin: 20px 0;
+const ReviewCount = styled.span`
   color: #666;
 `;
 
-const ColorSelection = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
+const Description = styled.p`
+  color: #333;
+  margin: 1rem 0;
 `;
 
-const ColorCircle = styled.span`
+const ColorOptions = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+`;
+
+const ColorOption = styled.span`
   display: inline-block;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
   background-color: ${props => props.color};
-  margin-right: 10px;
+  margin-right: 1rem;
   cursor: pointer;
-  border: 2px solid ${props => props.selected ? '#000' : 'transparent'};
+
+  &:hover {
+    border: 2px solid #000;
+  }
 `;
 
 const Price = styled.p`
-  font-size: 1.5em;
-  color: #333;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin: 20px 0;
+  color: #a17e7e;
+  margin: 1rem 0;
 `;
 
-const AddToCartButton = styled.button`
-  padding: 10px 20px;
-  background-color: #000;
+const Button = styled.button`
+  background-color: #a17e7e;
   color: #fff;
+  padding: 0.8rem 1.2rem;
   border: none;
+  border-radius: 20px;
   cursor: pointer;
-  margin-right: 10px;
-  transition: background-color 0.3s ease;
+  margin-right: 1rem;
+
   &:hover {
-    background-color: #555;
+    background-color: #965f5f;
   }
 `;
 
-const BuyNowButton = styled(AddToCartButton)`
-  background-color: #555;
-  &:hover {
-    background-color: #333;
-  }
-`;
-
-const ProductDetails = () => {
-  const [product, setProduct] = useState({
-    name: 'Porsche 911',
-    description: 'A masterpiece of design, the Porsche 911 has been the flagship of the brand for decades.',
-    price: '€200,000',
-    images: [img1, img2, img3, img4],
-    mainImageIndex: 0,
-  });
-
-  const setMainImage = (index) => {
-    setProduct({ ...product, mainImageIndex: index });
-  };
+const CarDetails = () => {
+  const [currentImg, setCurrentImg] = useState(img1);
 
   return (
     <>
     <Header/>
-      <ProductDetailContainer>
-        <ImageSection>
-          <MainImage src={product.images[product.mainImageIndex]} alt="Car image" />
-          <ThumbnailContainer>
-            {product.images.map((img, index) => (
-              <Thumbnail
-                key={index}
-                src={img}
-                alt={`Thumbnail ${index + 1}`}
-                onClick={() => setMainImage(index)}
-              />
-            ))}
-          </ThumbnailContainer>
-        </ImageSection>
-        <DetailsSection>
-          <ProductTitle>{product.name}</ProductTitle>
-          <RatingAndReview>
-            {/* Insert star rating component */}
-            4.5
-          </RatingAndReview>
-          <ProductDescription>{product.description}</ProductDescription>
-          <ColorSelection>
-            {/* Insert color circles */}
-          </ColorSelection>
-          <Price>{product.price}</Price>
-          <AddToCartButton>Add to Cart</AddToCartButton>
-          <BuyNowButton>Buy Now</BuyNowButton>
-        </DetailsSection>
-      </ProductDetailContainer>
+    <Container>
+      <ImageContainer>
+        <MainImage src={currentImg} alt="Car Main" />
+        <ThumbnailsContainer>
+          {/* Update the state to the clicked thumbnail's src */}
+          <Thumbnail src={img1} alt="Thumbnail 1" onClick={() => setCurrentImg(img1)} />
+          <Thumbnail src={img2} alt="Thumbnail 2" onClick={() => setCurrentImg(img2)} />
+          <Thumbnail src={img3} alt="Thumbnail 3" onClick={() => setCurrentImg(img3)} />
+          <Thumbnail src={img4} alt="Thumbnail 4" onClick={() => setCurrentImg(img4)} />
+          {/* Add more thumbnails with onClick as needed */}
+        </ThumbnailsContainer>
+      </ImageContainer>
+      <DetailsContainer>
+        <Title>Honda - Civic Type R</Title>
+        <EngineCapacity>6000 cc</EngineCapacity>
+        <RatingContainer>
+          <Rating>★★★★☆</Rating>
+          <ReviewCount>4.5</ReviewCount>
+        </RatingContainer>
+        <Description>
+          The culmination of comfort, luxury, and powerful living is embodied in the First-Ever BMUX7 – the biggest BMU ever built.
+        </Description>
+        <ColorOptions>
+          <ColorOption color="#000" /> {/* Black */}
+          <ColorOption color="#fff" /> {/* White */}
+          <ColorOption color="#5F9EA0" /> {/* CadetBlue */}
+          {/* Add more color options as needed */}
+        </ColorOptions>
+        <Price>Price: 250 $</Price>
+        <Button>Add To Cart</Button>
+        <Button>Buy Now</Button>
+      </DetailsContainer>
+    </Container>
     </>
   );
 };
 
-export default ProductDetails;
+export default CarDetails;
