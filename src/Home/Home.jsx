@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import pic from '../images/IMG_20240301_075813_542.png'
 import back from '../images/Vector 1.png'
+import icon1 from '../icons/Frame 71.svg'
 const CarImage = styled.img`
   width: 70%; // Adjust size accordingly
   height: 100%;
@@ -62,48 +63,59 @@ const ExploreButton = styled.button`
   border-radius: 20px;
 `;
 const FilterLabel = styled.label`
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: #000;
-  margin-right: 0.5rem;
-  font-family: 'Righteous';
+font-size: 0.8rem;
+font-weight: bold;
+color: #000;
+margin-right: 0.5rem;
+font-family: 'Righteous';
 `;
 
 const FilterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 2rem;
-  @media (max-width: 768px) {
-    padding: 0.5rem 0; // تقليل الحشوة للشاشات الصغيرة
-  }
+display: flex;
+flex-direction: column;
+padding: 0 2rem;
+position: relative; // تعيين الموقف النسبي لإضافة الأيقونات
+@media (max-width: 768px) {
+  padding: 0.5rem 0;
+}
 `;
 
 const SearchSection = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding:1rem 2rem;
-  background-color: #ececec; // تغيير لون الخلفية
-  margin: 0 150px; // توسيط القسم
-  border-radius: 30px; 
-  @media (max-width: 768px) {
-    flex-direction: column; // تغيير التوجيه ليكون العناصر فوق بعض
-    margin: 3rem ; // إزالة التهميش للتوسيط في الشاشات الصغيرة
-    padding: 1rem; // تقليل الحشوة
-  }
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 1rem 2rem;
+background-color: #ececec;
+margin: 0 150px;
+border-radius: 30px;
+
+@media (max-width: 768px) {
+  flex-direction: column;
+  margin: 3rem;
+  padding: 1rem;
+}
 `;
 
 const Filter = styled.select`
-  padding: 0.5rem 1rem;
-  margin-top: 0.3rem; // إضافة هامش علوي
-  border: 1px solid #ddd;
-  border-radius: 20px; // تقريب الحواف
-  font-size: 0.8rem;
-  color: #6f6f6f; // تغيير لون النص
-  @media (max-width: 768px) {
-    width: 100%; // جعل العرض كامل للشاشات الصغيرة
-    margin-top: 0.5rem; // زيادة المسافة بين العناصر
-  }
+padding: 0.5rem 1rem;
+margin-top: 0.3rem;
+border: none; // إزالة الحدود
+border-radius: 20px;
+font-size: 0.8rem;
+color: #6f6f6f;
+background-color: #ececec
+@media (max-width: 768px) {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+&:after {
+  content: url(${icon1}); // إضافة مسار الأيقونة اليمنى
+  position: relative;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 `;
 
 const SearchButton = styled.button`
