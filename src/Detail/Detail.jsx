@@ -8,6 +8,7 @@ import Header from '../Header/Header'
 import sahm from '../icons/chevron-right.svg'
 
 import { css } from 'styled-components';
+import Footer from '../Footer/Footer';
 
 // أضف هذه الوظيفة لتسهيل استخدام الإعلام المختلفة
 const sizes = {
@@ -181,6 +182,7 @@ const CarDetails = () => {
         <Button>Buy Now</Button>
       </DetailsContainer>
     </Container>
+    <Footer/>
     </>
   );
 };

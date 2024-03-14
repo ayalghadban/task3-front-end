@@ -6,7 +6,7 @@ import img2 from '../images/ryan-spencer-c-NEiPIxpYI-unsplash.jpg';
 import img3 from '../images/erik-mclean-AaYAElNOxsQ-unsplash.jpg';
 import img4 from '../images/ixography-05Q_XPF_YKs-unsplash.jpg';
 import back from '../images/Vector 2 (2).svg'
-
+import Footer from '../Footer/Footer';
 const PageContainer = styled.div`
   background: url(${back});
   padding: 20px;
@@ -145,6 +145,7 @@ const Cart = () => {
           ))}
         </CartContainer>
       </PageContainer>
+      <Footer/>
     </>
   );
 };

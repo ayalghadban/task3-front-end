@@ -142,6 +142,9 @@ const HamburgerIcon = () => (
     <rect y="60" width="100" height="10"></rect>
   </svg>
 );
+const handleCartClick = () => {
+  window.location.href = '/cart'; // استبدل بالرابط المطلوب
+};
 
 const Header = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -164,7 +167,7 @@ const Header = () => {
       </Nav>
       <Actions isVisible={isNavVisible}>
         <ShoppingCartIcon onClick={toggleNav}>
-          <img src={cart} alt='Cart' style={{width:39, height:35}}/>
+          <img src={cart} alt='Cart' style={{width:39, height:35}} onClick={handleCartClick}/>
         </ShoppingCartIcon>
         <RegisterButton onClick={toggleNav}>Register</RegisterButton>
       </Actions>

@@ -91,6 +91,13 @@ const Button = styled.button`
     color:white;
   }
 `;
+const handleDetailsClick = () => {
+  window.location.href = '/details'; // استبدل بالرابط المطلوب
+};
+
+const handleBuyNowClick = () => {
+  window.location.href = '/details'; // استبدل بالرابط المطلوب
+};
 
 const cars = [
   { name: 'AUDI', image: img1 },
@@ -113,8 +120,8 @@ const TopCategories = () => {
               <CarName>{car.name}</CarName>
               <CarDetails>4 Seater · Manual · 500KM/H</CarDetails>
               <Price>Starting at $500/Day</Price>
-              <Button>Details</Button>
-              <Button>Buy Now</Button>
+              <Button onClick={handleDetailsClick}>Details</Button>
+              <Button onClick={handleBuyNowClick}>Buy Now</Button>
             </CarInfo>
           </Card>
         ))}

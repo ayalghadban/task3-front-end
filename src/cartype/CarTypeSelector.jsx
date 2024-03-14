@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import img1 from '../images/dhiva-krishna-GRV4ypBKgxE-unsplash.jpg'
 import img2 from '../images/joey-banks-YApiWyp0lqo-unsplash.jpg'
 import img3 from '../images/josh-berquist-_4sWbzH5fp8-unsplash.jpg'
 import img4 from '../images/mathieu-renier-4WBvCqeMaDE-unsplash.jpg'
+import leftArrowImg from '../icons/Frame 106.svg';
+import rightArrowImg from '../icons/Frame 96.svg';
+
 
 const CarTypeContainer = styled.div`
   display: flex;
@@ -13,6 +16,7 @@ const CarTypeContainer = styled.div`
   align-items: center;
   scroll-snap-type: x mandatory;
   justify-content: center;
+  position:relative;
 `;
 
 const CarTypeCard = styled.div`
@@ -44,12 +48,29 @@ const CarTypeCard = styled.div`
   }
 `;
 
+const Arrow = styled.img`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+
+  // ستايل للسهم الأيمن
+  ${({ right }) => right && `
+    right: 10px;
+  `}
+
+  // ستايل للسهم الأيسر
+  ${({ left }) => left && `
+    left: 10px;
+  `}
+`;
 const FindByCarType = styled.h2`
   text-align: center;
   margin-bottom: 20px;
 `;
 const ScrollButton = styled.button`
-  display: none; // By default, we don't show scroll buttons
+  display: block; // By default, we don't show scroll buttons
   
   @media (max-width: 768px) {
     display: block; // Show scroll buttons on mobile devices
@@ -82,10 +103,20 @@ const carTypes = [
   { name: 'Audi', image: img4 },
 ];
 const CarTypeSelector = () => {
+  const containerRef = useRef();
+  const scroll = (direction) => {
+    if (containerRef.current) {
+      const { scrollLeft, clientWidth } = containerRef.current;
+      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      containerRef.current.scrollBy({ left: scrollTo, behavior: 'smooth' });
+    }
+  };
   return (
     <>
-      <FindByCarType>Find by Car Type</FindByCarType>
-      <CarTypeContainer>
+       <FindByCarType>Find by Car Type</FindByCarType>
+      <CarTypeContainer ref={containerRef}>
+        <Arrow src={leftArrowImg} left onClick={() => scroll('left')} />
+        <Arrow src={rightArrowImg} right onClick={() => scroll('right')} />
         {carTypes.map((car) => (
           <CarTypeCard
             key={car.name}
