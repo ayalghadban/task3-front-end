@@ -1,28 +1,37 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import img1 from '../images/dhiva-krishna-GRV4ypBKgxE-unsplash.jpg'
-import img2 from '../images/joey-banks-YApiWyp0lqo-unsplash.jpg'
-import img3 from '../images/josh-berquist-_4sWbzH5fp8-unsplash.jpg'
-import img4 from '../images/mathieu-renier-4WBvCqeMaDE-unsplash.jpg'
-import leftArrowImg from '../icons/Frame 106.svg';
-import rightArrowImg from '../icons/Frame 96.svg';
-
-
+import img1 from '../images/dhiva-krishna-GRV4ypBKgxE-unsplash.jpg';
+import img2 from '../images/joey-banks-YApiWyp0lqo-unsplash.jpg';
+import img3 from '../images/josh-berquist-_4sWbzH5fp8-unsplash.jpg';
+import img4 from '../images/mathieu-renier-4WBvCqeMaDE-unsplash.jpg';
+import Slider from 'react-slick';
 const CarTypeContainer = styled.div`
-  display: flex;
-  overflow-x: auto;
-  padding: 20px;
-  gap: 20px; // This creates space between the items
-  align-items: center;
-  scroll-snap-type: x mandatory;
-  justify-content: center;
-  position:relative;
+display: flex;
+overflow-x: auto;
+padding: 20px;
+gap: 20px;
+align-items: center;
+scroll-snap-type: x mandatory;
+justify-content: center;
+position: relative;
+
+&::-webkit-scrollbar {
+  display: none;  // for Chrome, Safari, and Opera
+}
+
+-ms-overflow-style: none;  // for Internet Explorer and Edge
+scrollbar-width: none;  // for Firefox
+
+@media (max-width: 768px) {
+  padding: 10px;
+  gap: 10px;
+};
 `;
 
 const CarTypeCard = styled.div`
-  flex: 0 0 auto; // This prevents the cards from shrinking and enables scrolling
-  width: 200px; // Adjust the width as needed
-  height: 120px; // Adjust the height as needed
+  flex: 0 0 auto;
+  width: 200px;
+  height: 120px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -37,86 +46,61 @@ const CarTypeCard = styled.div`
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5); // Semi-transparent overlay
+      background-color: rgba(0, 0, 0, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
-      font-size: 20px; // Large text
+      font-size: 20px;
       border-radius: 10px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 100px;
+    &:hover {
+      &::after {
+        font-size: 16px;
+      }
     }
   }
 `;
 
-const Arrow = styled.img`
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-
-  // ستايل للسهم الأيمن
-  ${({ right }) => right && `
-    right: 10px;
-  `}
-
-  // ستايل للسهم الأيسر
-  ${({ left }) => left && `
-    left: 10px;
-  `}
-`;
 const FindByCarType = styled.h2`
   text-align: center;
   margin-bottom: 20px;
 `;
-const ScrollButton = styled.button`
-  display: block; // By default, we don't show scroll buttons
-  
-  @media (max-width: 768px) {
-    display: block; // Show scroll buttons on mobile devices
-    position: absolute; 
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-
-    &:first-of-type {
-      left: 10px;
-    }
-
-    &:last-of-type {
-      right: 10px;
-    }
-  }
-`;
-
 const carTypes = [
   { name: 'Volvo', image: img1 },
   { name: 'Bugatti', image: img2 },
-  { name: 'BMW', image:img3 },
+  { name: 'BMW', image: img3 },
+  { name: 'Audi', image: img4 },
+  { name: 'Volvo', image: img1 },
+  { name: 'Bugatti', image: img2 },
+  { name: 'BMW', image: img3 },
+  { name: 'Audi', image: img4 },
+  { name: 'Volvo', image: img1 },
+  { name: 'Bugatti', image: img2 },
+  { name: 'BMW', image: img3 },
   { name: 'Audi', image: img4 },
 ];
+
 const CarTypeSelector = () => {
   const containerRef = useRef();
   const scroll = (direction) => {
     if (containerRef.current) {
       const { scrollLeft, clientWidth } = containerRef.current;
-      const scrollTo = direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
+      const scrollTo =
+        direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth;
       containerRef.current.scrollBy({ left: scrollTo, behavior: 'smooth' });
     }
   };
+
   return (
     <>
-       <FindByCarType>Find by Car Type</FindByCarType>
+      <FindByCarType>Find by Car Type</FindByCarType>
       <CarTypeContainer ref={containerRef}>
-        <Arrow src={leftArrowImg} left onClick={() => scroll('left')} />
-        <Arrow src={rightArrowImg} right onClick={() => scroll('right')} />
         {carTypes.map((car) => (
           <CarTypeCard
             key={car.name}
