@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../Header/Header';
-import img1 from '../images/dhiva-krishna-X16zXcbxU4U-unsplash.jpg';
-import img2 from '../images/ryan-spencer-c-NEiPIxpYI-unsplash.jpg';
-import img3 from '../images/erik-mclean-AaYAElNOxsQ-unsplash.jpg';
-import img4 from '../images/ixography-05Q_XPF_YKs-unsplash.jpg';
 import back from '../images/Vector 2 (2).svg'
 import Footer from '../Footer/Footer';
+import { useCart } from './CartContext';
 const PageContainer = styled.div`
   background: url(${back});
   padding: 20px;
@@ -76,52 +73,13 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
-// Mock data
-const cartItems = [
-  {
-    id: 1,
-    name: 'Audi',
-    code: '#715637',
-    price: '€240.55',
-    color: 'Black',
-    image:img1, // يجب استبدال هذا بمسار الصورة الصحيح
-    engineCapacity: '6000cc'
-  },
-  {
-    id: 2,
-    name: 'Audi',
-    code: '#715637',
-    price: '€240.55',
-    color: 'Black',
-    image:img2, // يجب استبدال هذا بمسار الصورة الصحيح
-    engineCapacity: '6000cc'
-  },
-  {
-    id: 3,
-    name: 'Audi',
-    code: '#715637',
-    price: '€240.55',
-    color: 'Black',
-    image:img3, // يجب استبدال هذا بمسار الصورة الصحيح
-    engineCapacity: '6000cc'
-  },
-  {
-    id: 4,
-    name: 'Audi',
-    code: '#715637',
-    price: '€240.55',
-    color: 'Black',
-    image:img4, // يجب استبدال هذا بمسار الصورة الصحيح
-    engineCapacity: '6000cc'
-  },
-  // ... other items
-];
+// Mock dat
 
 const Cart = () => {
-  // Function to handle removing items from the cart
+  const { cartItems, removeFromCart } = useCart();
+
   const handleRemove = (id) => {
-    // Placeholder for remove logic
-    alert(`Remove item with id ${id}`);
+    removeFromCart(id);
   };
 
   return (
@@ -135,7 +93,6 @@ const Cart = () => {
               <CartItemImage src={item.image} alt={item.name} />
               <ItemDetails>
                 <ItemName>{item.name}</ItemName>
-                <ItemCode>Code: {item.code}</ItemCode>
                 <p>Engine Capacity: {item.engineCapacity}</p>
               </ItemDetails>
               <ItemPrice>{item.price}</ItemPrice>
@@ -149,5 +106,6 @@ const Cart = () => {
     </>
   );
 };
+
 
 export default Cart;

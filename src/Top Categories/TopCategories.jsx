@@ -4,6 +4,10 @@ import img1 from '../images/dhiva-krishna-X16zXcbxU4U-unsplash.jpg';
 import img2 from '../images/ryan-spencer-c-NEiPIxpYI-unsplash.jpg';
 import img3 from '../images/erik-mclean-AaYAElNOxsQ-unsplash.jpg';
 import img4 from '../images/ixography-05Q_XPF_YKs-unsplash.jpg';
+import { useCart } from '../Cart/CartContext';
+import  {useNavigate} from 'react-router-dom';
+
+
 
 const TopCategoriesContainer = styled.div`
   max-width: 1200px;
@@ -94,21 +98,22 @@ const Button = styled.button`
 const handleDetailsClick = () => {
   window.location.href = '/details'; // استبدل بالرابط المطلوب
 };
-
-const handleBuyNowClick = () => {
-  window.location.href = '/details'; // استبدل بالرابط المطلوب
-};
-
 const cars = [
-  { name: 'AUDI', image: img1 },
-  { name: 'Honda', image: img2 },
-  { name: 'VOLVO', image: img3 },
-  { name: 'BMW', image: img4 },
-  { name: 'AUDI', image: img1 },
-  { name: 'Honda', image: img2 },
+  {id:1, name: 'AUDI', image: img1, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
+  {id:2, name: 'Honda', image: img2, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
+  {id:3, name: 'VOLVO', image: img3, price:200, color: 'Black',code: '#715637',engineCapacity: '6000cc'},
+  {id:4, name: 'BMW', image: img4, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
+  {id:5, name: 'AUDI', image: img1, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
+  {id:6, name: 'Honda', image: img2, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
 ];
 
 const TopCategories = () => {
+  const { addToCart } = useCart();
+
+  const handleBuyNowClick = (car) => {
+    addToCart(car);
+    console.log(car);
+  }
   return (
     <>
       <CategoryTitle>Top Categories</CategoryTitle>
@@ -119,9 +124,9 @@ const TopCategories = () => {
             <CarInfo>
               <CarName>{car.name}</CarName>
               <CarDetails>4 Seater · Manual · 500KM/H</CarDetails>
-              <Price>Starting at $500/Day</Price>
+              <Price>Starting at ${car.price}/</Price>
               <Button onClick={handleDetailsClick}>Details</Button>
-              <Button onClick={handleBuyNowClick}>Buy Now</Button>
+              <Button onClick={() => handleBuyNowClick(car)}>Buy Now</Button>
             </CarInfo>
           </Card>
         ))}
