@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import img1 from '../images/dhiva-krishna-X16zXcbxU4U-unsplash.jpg';
 import img2 from '../images/ryan-spencer-c-NEiPIxpYI-unsplash.jpg';
@@ -6,6 +6,7 @@ import img3 from '../images/erik-mclean-AaYAElNOxsQ-unsplash.jpg';
 import img4 from '../images/ixography-05Q_XPF_YKs-unsplash.jpg';
 import { useCart } from '../Cart/CartContext';
 import  {useNavigate} from 'react-router-dom';
+import Header from '../Header/Header';
 
 
 
@@ -79,6 +80,17 @@ const Price = styled.p`
   margin: 0.5rem 0;
 `;
 
+/*const ConfirmationMessage = styled.div`
+  text-align: center;
+  justify-content:center;
+  color: white;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  background-color:#a17e7e;
+  width: 50%;
+  hight:20%;
+  border-radius:50px;
+`;*/
 const Button = styled.button`
   background-color: #fff;
   color: black;
@@ -96,7 +108,7 @@ const Button = styled.button`
   }
 `;
 const handleDetailsClick = () => {
-  window.location.href = '/details'; // استبدل بالرابط المطلوب
+  window.location.href = '/details';   
 };
 const cars = [
   {id:1, name: 'AUDI', image: img1, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
@@ -110,10 +122,13 @@ const cars = [
 const TopCategories = () => {
   const { addToCart } = useCart();
 
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   const handleBuyNowClick = (car) => {
     addToCart(car);
-    console.log(car);
-  }
+    setShowConfirmation(true); // عرض الرسالة
+    setTimeout(() => setShowConfirmation(false), 3000); // إخفاء الرسالة بعد 3 ثواني
+  }; 
   return (
     <>
       <CategoryTitle>Top Categories</CategoryTitle>
@@ -129,10 +144,15 @@ const TopCategories = () => {
               <Button onClick={() => handleBuyNowClick(car)}>Buy Now</Button>
             </CarInfo>
           </Card>
+          
         ))}
       </TopCategoriesContainer>
+      
+
     </>
   );
 };
 
 export default TopCategories;
+
+      /*<div style={{ display:'flex', alignItems:'center' }}>{showConfirmation && <ConfirmationMessage>Added to cart successfully!</ConfirmationMessage>}</div>*/

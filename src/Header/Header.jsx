@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import logo from '../images/Logo.png'
 import cart from '../images/cart.svg'
 
-
-
 const NavbarContainer = styled.header`
+
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -44,8 +43,6 @@ width: 100%;
     justify-content: space-around; // This will add space around each link
 }
 `;
-
-
 const StyledLink = styled(Link)`
   font-family: "Righteous", sans-serif;
   margin: 0 1rem;
