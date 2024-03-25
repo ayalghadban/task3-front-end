@@ -88,18 +88,20 @@ const Cart = () => {
       <PageContainer>
         <CartHeader>my Cart</CartHeader>
         <CartContainer>
-          {cartItems.map(item => (
-            <CartItemContainer key={item.id}>
-              <CartItemImage src={item.image} alt={item.name} />
-              <ItemDetails>
-                <ItemName>{item.name}</ItemName>
-                <p>Engine Capacity: {item.engineCapacity}</p>
-              </ItemDetails>
-              <ItemPrice>{item.price}</ItemPrice>
-              <ItemColor>Color: {item.color}</ItemColor>
-              <DeleteButton onClick={() => handleRemove(item.id)}>X</DeleteButton>
-            </CartItemContainer>
-          ))}
+        {cartItems.map(item => (
+  <CartItemContainer key={item.id}>
+    <CartItemImage src={item.image} alt={item.name} />
+    <ItemDetails>
+      <ItemName>{item.name}</ItemName>
+      <ItemCode>Engine Capacity: {item.engineCapacity}</ItemCode>
+      <ItemColor>Color: {item.color}</ItemColor>
+      <ItemPrice>${item.price}</ItemPrice>
+      <p>Quantity: {item.quantity}</p>
+    </ItemDetails>
+    <DeleteButton onClick={() => handleRemove(item.id)}>Remove</DeleteButton>
+  </CartItemContainer>
+))}
+
         </CartContainer>
       </PageContainer>
       <Footer/>

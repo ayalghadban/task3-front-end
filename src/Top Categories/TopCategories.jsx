@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import img1 from '../images/dhiva-krishna-X16zXcbxU4U-unsplash.jpg';
-import img2 from '../images/ryan-spencer-c-NEiPIxpYI-unsplash.jpg';
-import img3 from '../images/erik-mclean-AaYAElNOxsQ-unsplash.jpg';
-import img4 from '../images/ixography-05Q_XPF_YKs-unsplash.jpg';
 import { useCart } from '../Cart/CartContext';
-import  {useNavigate} from 'react-router-dom';
-import Header from '../Header/Header';
-
-
-
+import data from './data';
+import { useNavigate } from 'react-router-dom';
 const TopCategoriesContainer = styled.div`
   max-width: 1200px;
   margin: 40px;
@@ -74,23 +67,10 @@ const CarDetails = styled.p`
   color: #555;
   margin: 0.5rem 0;
 `;
-
 const Price = styled.p`
   color: #000;
   margin: 0.5rem 0;
 `;
-
-/*const ConfirmationMessage = styled.div`
-  text-align: center;
-  justify-content:center;
-  color: white;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  background-color:#a17e7e;
-  width: 50%;
-  hight:20%;
-  border-radius:50px;
-`;*/
 const Button = styled.button`
   background-color: #fff;
   color: black;
@@ -110,16 +90,10 @@ const Button = styled.button`
 const handleDetailsClick = () => {
   window.location.href = '/details';   
 };
-const cars = [
-  {id:1, name: 'AUDI', image: img1, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
-  {id:2, name: 'Honda', image: img2, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
-  {id:3, name: 'VOLVO', image: img3, price:200, color: 'Black',code: '#715637',engineCapacity: '6000cc'},
-  {id:4, name: 'BMW', image: img4, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
-  {id:5, name: 'AUDI', image: img1, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
-  {id:6, name: 'Honda', image: img2, price:200, color: 'Black', code: '#715637',engineCapacity: '6000cc'},
-];
+
 
 const TopCategories = () => {
+
   const { addToCart } = useCart();
 
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -129,30 +103,32 @@ const TopCategories = () => {
     setShowConfirmation(true); // عرض الرسالة
     setTimeout(() => setShowConfirmation(false), 3000); // إخفاء الرسالة بعد 3 ثواني
   }; 
+
+  const navigate = useNavigate();
+
+  const handleDetailsClick = (carId) => {
+    navigate(`/details/${carId}`);
+  };
   return (
     <>
       <CategoryTitle>Top Categories</CategoryTitle>
       <TopCategoriesContainer>
-        {cars.map((car, index) => (
+        {data.map((car, index) => (
           <Card key={index}>
-            <CarImage src={car.image} alt={car.name} />
+            <CarImage src={car.mainImage} alt={car.carname} />
             <CarInfo>
-              <CarName>{car.name}</CarName>
-              <CarDetails>4 Seater · Manual · 500KM/H</CarDetails>
+              <CarName>{car.carname}</CarName>
+              <CarDetails>{car.seat} Seats · {car.transmission} · {car.speed}KM/H</CarDetails>
               <Price>Starting at ${car.price}/</Price>
-              <Button onClick={handleDetailsClick}>Details</Button>
+              <Button onClick={() => handleDetailsClick(car.id)}>Details</Button>
               <Button onClick={() => handleBuyNowClick(car)}>Buy Now</Button>
             </CarInfo>
           </Card>
           
         ))}
       </TopCategoriesContainer>
-      
-
     </>
   );
 };
 
 export default TopCategories;
-
-      /*<div style={{ display:'flex', alignItems:'center' }}>{showConfirmation && <ConfirmationMessage>Added to cart successfully!</ConfirmationMessage>}</div>*/
