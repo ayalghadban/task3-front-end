@@ -90,7 +90,7 @@ const Cart = () => {
         <CartContainer>
         {cartItems.map(item => (
   <CartItemContainer key={item.id}>
-    <CartItemImage src={item.image} alt={item.name} />
+    <CartItemImage src={item.mainImage} alt={item.name} />
     <ItemDetails>
       <ItemName>{item.name}</ItemName>
       <ItemCode>Engine Capacity: {item.engineCapacity}</ItemCode>
@@ -101,7 +101,6 @@ const Cart = () => {
     <DeleteButton onClick={() => handleRemove(item.id)}>Remove</DeleteButton>
   </CartItemContainer>
 ))}
-
         </CartContainer>
       </PageContainer>
       <Footer/>
